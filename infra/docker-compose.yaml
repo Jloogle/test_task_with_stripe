@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db_stripe:
+    image: postgres:13.0-alpine
+    volumes:
+      - db_stripe:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+
+  backend:
+    image: jloogle/stripe-task:latest
+    restart: always
+    volumes:
+      - static:/app/static/
+    depends_on:
+      - db_stripe
+    env_file:
+      - ./.env
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - static:/var/html/static/
+    depends_on:
+      - backend
+
+volumes:
+  db_stripe:
+  static:
