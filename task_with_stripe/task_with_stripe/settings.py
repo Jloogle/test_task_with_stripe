@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import environ
@@ -5,22 +6,25 @@ import environ
 
 env = environ.Env(
     SECRET_KEY=(str, '*'),
-    ALLOWED_HOSTS=(list, []),
     DB_ENGINE=str,
     DB_NAME=str,
     POSTGRES_USER=str,
     POSTGRES_PASSWORD=str,
     DB_HOST=str,
     DB_PORT=int,
+    STRIPE_SECRET_KEY=str,
+    STRIPE_PUBLIC_KEY=str,
 )
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY', default='secret_key_123321')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -51,7 +55,7 @@ ROOT_URLCONF = 'task_with_stripe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +82,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -108,9 +110,10 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
