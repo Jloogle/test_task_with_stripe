@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import ItemBuyView, buy
+from .views import ItemView, buy
 
 app_name = 'payments'
 
 urlpatterns = [
     path('buy/<int:pk>/', buy, name='buy'),
-    path('item/<int:pk>/', ItemBuyView.as_view(), name='item')
+    path('item/<int:pk>/', ItemView.as_view(), name='item')
 ]
