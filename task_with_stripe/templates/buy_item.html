@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy {{ item.name }}</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section>
+      <div class="product">
+        <div class="description">
+          <h3>{{ item.name }} </h3>
+          <p>{{ item.description }}</p>
+          <p>{{ item.price }} $</p>
+        </div>
+      </div>
+      <form action="{% url 'payments:buy' item.id %}" method="GET">
+          {% csrf_token %}
+        <button type="submit" id="checkout-button">Buy</button>
+      </form>
+    </section>
+  </body>
+</html>
