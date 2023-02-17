@@ -24,7 +24,7 @@ STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['158.160.29.34', 'localhost', 'backend']
 
 
 INSTALLED_APPS = [
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
+    'api',
     'payments',
 ]
 
