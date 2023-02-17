@@ -139,4 +139,5 @@ dmypy.json
 cython_debug/
 
 .idea
-!/task_with_stripe/static/
+/task_with_stripe/static/
+/infra/.env
