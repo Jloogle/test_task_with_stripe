@@ -17,7 +17,8 @@
 * Yandex.Cloud
 
 # Порядок запуска
-##На локальном компьютере:
+
+## На локальном компьютере:
 
 перейдите каталок с файлом Dockerfile:
 ```
@@ -57,6 +58,7 @@ backend:
 ```
 
 Создайте файл .env внутри папки infra/ и заполните переменными окружения:
+
 (Переменные STRIPE_PUBLIC_KEY и STRIPE_SECRET_KEY можно получить на сайте https://dashboard.stripe.com/test/apikeys после регистрации)
 ```
 SECRET_KEY
