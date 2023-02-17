@@ -13,7 +13,7 @@
       var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
       var buyButton = document.getElementById('buy-button');
       buyButton.addEventListener("click", function () {
-      fetch("{% url 'payments:buy' item.id %}", {
+      fetch("{% url 'api:buy' pk %}", {
         method: "GET",
       })
         .then(function (response) {
